@@ -1,23 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
 
+import HomePage from './component/HomePage';
+import LoginPage from './component/LoginPage';
+import RegisterPage from './component/RegisterPage';
+
 function App() {
   return (
     <div className="App">
       <h1> Hello World</h1>
-      <form >
-        <input 
-          type="text"
-          name="name"
-          placeholder="login"
-        />
-        <input
-          type="password"
-          name="password"    
-          placeholder="password"
-        />
-        <button type="submit"> Login </button>
-      </form>
+        <RegisterPage/>
     </div>
   );
 }
