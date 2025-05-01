@@ -29,7 +29,7 @@ function HomePage({user, onLogout}) {
             </div>
         </nav>
         <header>
-            {/* <h1>Welcome, {user.firstname} !</h1> */}
+            <h1>Welcome, {user.firstname} !</h1>
         </header>
         <main>{}</main>
     </div>

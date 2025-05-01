@@ -8,18 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-@RestController
+@SpringBootApplication
+
 public class CakeApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CakeApplication.class, args);
-	}
-
-
-	@GetMapping("/hello")
-	public String hello() {
-		return "Hello World!";
 	}
 
 }

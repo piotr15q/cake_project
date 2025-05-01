@@ -1,14 +1,21 @@
 import React, { useState } from "react";
+import axios from 'axios';
 
 function LoginPage({onLogin}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleLogin = async() => {
+    const handleLogin = async () => {
         try {
-            //const url = 
+          const url = `http://localhost:8080/api/v1/customer/get?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`;
+          const response = await axios.get(url);
+          const userData = response.data;
+          onLogin(userData);
+    
+        } catch (error) {
+          console.error('Login error:', error);
         }
-    }
+      };
 
     return (
         <div className="login-container">
@@ -20,7 +27,7 @@ function LoginPage({onLogin}) {
                 <div className="input-container">
                     <input type="password" placeholder="Enter password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                 </div>
-                <button className="login-button" type="button" /*onClick={handleLogin}*/>Login</button>
+                <button className="login-button" type="button" onClick={handleLogin}>Login</button>
             </div>
         </div>
     );
