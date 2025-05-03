@@ -4,6 +4,8 @@ import com.cake.cake.model.Customer;
 import com.cake.cake.repository.CustomerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +17,7 @@ public class CustomerService {
 
     //@Autowired
     private final CustomerRepository customerRepository;
-
+    private final PasswordEncoder passwordEncoder;
 
     public List<Customer> getCustomers() {
         return customerRepository.findAll();
@@ -24,7 +26,7 @@ public class CustomerService {
     public Customer getCustomer(String email, String password) {
         Optional<Customer> customerOptional = customerRepository.findCustomerByEmail(email);
         if (customerOptional.isPresent()) {
-            if (!customerOptional.get().getPassword().equals(password)) {
+            if (!passwordEncoder.matches(password, customerOptional.get().getPassword())) {
                 throw new IllegalStateException("password is not correct for email:" + email);
             }
         }
@@ -39,6 +41,9 @@ public class CustomerService {
         if (customerOptional.isPresent()) {
             throw new IllegalStateException("email already taken");
         }
+        String hashedPassword = passwordEncoder.encode(customer.getPassword());
+        customer.setPassword(hashedPassword);
+
         customerRepository.save(customer);
     }
 

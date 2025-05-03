@@ -1,12 +1,17 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function HomePage({user, onLogout}) {
     const [isUserMenuOpen, setUserMenuOpen] = useState(false);
+    const navigate = useNavigate();
 
     const toggleUserMenu = () => {
         setUserMenuOpen(!isUserMenuOpen);
     }
 
+    const handleClick = () => {
+        navigate('/addOrder');
+    }
 
     return (
     <div className="home-page">
@@ -31,6 +36,9 @@ function HomePage({user, onLogout}) {
         <header>
             <h1>Welcome, {user.firstname} !</h1>
         </header>
+        <div>
+            <button onClick={handleClick}> Add new order offer </button>
+        </div>
         <main>{}</main>
     </div>
     );

@@ -6,6 +6,7 @@ import './App.css';
 import HomePage from './component/HomePage';
 import LoginPage from './component/LoginPage';
 import RegisterPage from './component/RegisterPage';
+import AddOrderPage from './component/AddOrderPage';
 
 function App() {
   const [user, setUser] = useState('');
@@ -33,6 +34,7 @@ function App() {
             }
           />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path='/addOrder' element={<AddOrderPage/>}/>
         </Routes>
         <div>
           {!user && (

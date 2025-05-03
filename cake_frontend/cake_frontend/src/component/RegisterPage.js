@@ -7,8 +7,22 @@ function RegisterPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [registrationSucces, setRegistrationSuccess] = useState(false);
+    const [isError, setError] = useState(false);
+
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     const handleRegistration = async() => {
+
+        if (firstname === "" || lastname === "" || email === "" || password === "") {
+            alert("you must fill in all the fields ");
+            return;
+        }
+
+        if(!emailRegex.test(email)) {
+            alert("Invalid email format")
+            return;
+        }
+
         try {
             const userData = {
                 firstname,
@@ -21,10 +35,27 @@ function RegisterPage() {
             console.log('User registered: ', response.data);
 
         } catch (error) {
+            setError(true);
             console.error('Registration error: ', error);
         }
         setRegistrationSuccess(true);
     };
+
+
+    if (isError) {
+        return (
+            <div className="centered-container">
+                <div className="login-container">
+                    <h1>this email is already used</h1>
+                    <h2> </h2>
+                <div className="registration-link">
+                    <p><a href="/">Login here</a></p>
+                </div>
+                </div>
+            </div>
+        ); 
+    }
+
 
     if (registrationSucces) {
         return (
@@ -40,6 +71,8 @@ function RegisterPage() {
             </div>
         );
     }
+
+    
 
     return (
         <div className="centered-container">
