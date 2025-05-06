@@ -7,6 +7,7 @@ import HomePage from './component/HomePage';
 import LoginPage from './component/LoginPage';
 import RegisterPage from './component/RegisterPage';
 import AddOrderPage from './component/AddOrderPage';
+import ViewFormPage from './component/FormViewPage';
 
 function App() {
   const [user, setUser] = useState('');
@@ -35,6 +36,7 @@ function App() {
           />
           <Route path="/register" element={<RegisterPage />} />
           <Route path='/addOrder' element={<AddOrderPage/>}/>
+          <Route path='/form' element={<ViewFormPage/>}/>
         </Routes>
         <div>
           {!user && (
