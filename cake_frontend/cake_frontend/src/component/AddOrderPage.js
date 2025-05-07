@@ -36,13 +36,17 @@ function AddOrderPage() {
   };
 
   const saveForm = async() => {
+    const formToSave = {
+      title: "Formularz użytkownika",
+      fields: inputFields
+    };
     try {
-        const response = await fetch("http://localhost:8080/api/formfields/save", {
+        const response = await fetch("http://localhost:8080/api/forms/save", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(inputFields),
+            body: JSON.stringify(formToSave),
         });
 
         if (response.ok) {
@@ -65,7 +69,7 @@ function AddOrderPage() {
         return (
           <input
             type={field.type}
-            placeholder={field.label}
+            //placeholder={field.label}
             value={field.value}
             onChange={(e) => {
               const updated = [...inputFields];
@@ -78,7 +82,7 @@ function AddOrderPage() {
       case "textarea":
         return (
           <textarea
-            placeholder={field.label}
+            //placeholder={field.label}
             value={field.value}
             onChange={(e) => {
               const updated = [...inputFields];
