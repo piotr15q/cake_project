@@ -14,6 +14,23 @@ function HomePage({user, onLogout}) {
         navigate('/addOrder');
     }
 
+    const handleDeleteForm = async (formId) => {
+      try {
+          const response = await fetch(`http://localhost:8080/api/forms/${formId}`, {
+              method: 'DELETE', // metoda do usunięcia formularza
+          });
+
+          if (response.ok) {
+              // Usuń formularz z listy w stanie
+              setForms(forms.filter((form) => form.id !== formId));
+          } else {
+              console.error("Błąd usuwania formularza");
+          }
+      } catch (err) {
+          console.error("Błąd połączenia z API podczas usuwania formularza:", err);
+      }
+  };
+
     useEffect(() => {
         const fetchForms = async () => {
           try {
@@ -65,6 +82,7 @@ function HomePage({user, onLogout}) {
               <h3>{form.name || `Formularz #${index + 1}`}</h3>
               <p>Ilość pól: {form.fields?.length || 0}</p>
               <button onClick={() => navigate(`/form/${form.id}`)}>Pokaż</button>
+              <button onClick={() => handleDeleteForm(form.id)}>Usuń</button>
             </div>
           ))}
         </div></main>

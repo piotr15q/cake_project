@@ -25,4 +25,14 @@ public class FormController {
     public List<Form> getAllForms() {
         return formRepository.findAll();
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteForm(@PathVariable Long id) {
+        if (formRepository.existsById(id)) {
+            formRepository.deleteById(id);
+            return ResponseEntity.noContent().build();  // 204 No Content
+        } else {
+            return ResponseEntity.notFound().build();  // 404 Not Found
+        }
+    }
 }

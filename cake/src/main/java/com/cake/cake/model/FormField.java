@@ -1,6 +1,7 @@
 package com.cake.cake.model;
 
 import jakarta.persistence.*;
+import lombok.Setter;
 
 import java.util.List;
 
@@ -17,6 +18,12 @@ public class FormField {
 
     @ElementCollection
     private List<String> options;
+
+    @ManyToOne
+    @JoinColumn(name = "form_id")
+    private Form form;  // Dodane pole do przechowywania formularza
+
+    // Gettery i settery
 
     public Long getId() {
         return id;
@@ -56,5 +63,13 @@ public class FormField {
 
     public void setOptions(List<String> options) {
         this.options = options;
+    }
+
+    public Form getForm() {
+        return form;
+    }
+
+    public void setForm(Form form) {
+        this.form = form;
     }
 }
